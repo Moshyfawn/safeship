@@ -1,6 +1,6 @@
 {
   "name": "@moshyfawn/safeship",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "One-shot setup for secure npm package publishing: OIDC trusted publishing, staged publishing, hardened CI/CD.",
   "keywords": [
     "cli",
