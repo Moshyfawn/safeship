@@ -46,4 +46,13 @@ export const ghActionsPermissions: Module = {
       p.log.warn(`Skip: ${shortError(e)}`);
     }
   },
+  followUp: (state) => {
+    if (!state.existingReleaseYaml && !state.existingCiYaml) return undefined;
+    return [
+      `Workflows already existed when these settings were applied. Their first run may have failed before perms were set.`,
+      `Re-run failed workflows:`,
+      `  gh run list --repo ${state.repo} --status failure`,
+      `  gh run rerun <run-id> --repo ${state.repo}`,
+    ].join("\n");
+  },
 };
