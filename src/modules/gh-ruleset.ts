@@ -5,6 +5,12 @@ import type { Module } from "../core/types.ts";
 
 const CI_CHECK_NAME = "Lint, format & build";
 
+/**
+ * The ruleset is created without `required_status_checks` because the check
+ * doesn't exist until CI runs for the first time, and pre-listing a missing
+ * check would block every PR (including the first one that produces the check).
+ * The follow-up message tells the user to add it once CI has run.
+ */
 export const ghRuleset: Module = {
   id: "gh-ruleset",
   category: "github",
@@ -41,13 +47,6 @@ export const ghRuleset: Module = {
               require_last_push_approval: false,
               required_review_thread_resolution: true,
               allowed_merge_methods: ["squash"],
-            },
-          },
-          {
-            type: "required_status_checks",
-            parameters: {
-              strict_required_status_checks_policy: true,
-              required_status_checks: [{ context: CI_CHECK_NAME }],
             },
           },
         ],
